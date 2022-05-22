@@ -60,12 +60,11 @@ export default function Register() {
                   clearInterval(timerInterval)
                 }
               }).then((result) => {
-                /* Read more about handling dismissals below */
+                // * ketika berhasil register ubah nilai redirect menjadi true agar langsung diarahkan ke halaman login
                 if (result.dismiss === Swal.DismissReason.timer) {
                     setredirect(true);                  
                 }
               })
-            // * ketika berhasil register ubah nilai redirect menjadi true agar langsung diarahkan ke halaman login
         }
     }
 
