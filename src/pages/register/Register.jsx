@@ -36,15 +36,36 @@ export default function Register() {
         })
 
         // !ketika ada error dari backend
-        if (resp.status != 200) {
+        if (resp.status !== 200) {
             MySwal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: `Email ${email} sudah terdaftar!`,
               })
         }else {
+            let timerInterval
+            MySwal.fire({
+                title: 'Registrasi Berhasil',
+                icon: 'success',
+                timer: 2300,
+                timerProgressBar: false,
+                didOpen: () => {
+                  Swal.showLoading()
+                  const b = Swal.getHtmlContainer().querySelector('b')
+                  timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                  }, 100)
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    setredirect(true);                  
+                }
+              })
             // * ketika berhasil register ubah nilai redirect menjadi true agar langsung diarahkan ke halaman login
-            setredirect(true);
         }
     }
 
