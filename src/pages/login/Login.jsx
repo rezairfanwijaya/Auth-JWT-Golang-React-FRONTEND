@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import './Login.css'
 
 
-export default function Login() {
+export default function Login(props) {
     // * siapkan variable penampung inputan user
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
@@ -35,11 +35,13 @@ export default function Login() {
         })
 
         let code = resp.status
+        let content = await resp.json()
 
         // ! ketika ada error dari backend
-        if (code == 200) {
+        if (code === 200) {
             // * jika berhasil, redirect ke halaman home
             setredirect(true)
+            props.setname(content.name)
         }else {
             MySwal.fire({
                 icon: 'error',
