@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Main from './components/main/Main';
+import Index from './container/Index';
 
 function App() {
   return (
-    <Main/>
+    <Index/>
   );
 }
 
