@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 export default function Register() {
@@ -12,6 +14,9 @@ export default function Register() {
 
     // variable untuk membuat redirect false terlebih dahulu
     const [redirect, setredirect] = useState(false);
+
+    // sweet alert
+    const MySwal = withReactContent(Swal)
 
     // function handler submit
     // * buat function menjadi async
@@ -32,7 +37,11 @@ export default function Register() {
 
         // !ketika ada error dari backend
         if (resp.status != 200) {
-            alert(`Email ${email} sudah terdaftar`)
+            MySwal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Email ${email} sudah terdaftar!`,
+              })
         }else {
             // * ketika berhasil register ubah nilai redirect menjadi true agar langsung diarahkan ke halaman login
             setredirect(true);
