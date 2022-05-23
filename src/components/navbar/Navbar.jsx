@@ -36,7 +36,7 @@ export default function Navbar(props) {
                     <div className="nav-link active me-3" aria-current="page" >Hi, {props.name}</div>
                 </li>
                 <li className="nav-item">
-                    <Link to="/login"  className="nav-link active bg-danger rounded" onClick={logout}>Logout</Link>
+                    <Link to="/login"  className="nav-link active bg-danger rounded text-center" onClick={logout}>Logout</Link>
                 </li>
             </ul>
         )

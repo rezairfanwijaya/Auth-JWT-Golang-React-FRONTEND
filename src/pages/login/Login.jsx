@@ -37,6 +37,16 @@ export default function Login(props) {
         let code = resp.status
         let content = await resp.json()
 
+        const user = await fetch('http://localhost:8080/', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include', // * untuk mengambil cookies dari server
+        })
+
+        const totalUser = await user.json()
+        const allUser = totalUser.data
+        
+
         // ! ketika ada error dari backend
         if (code === 200) {
             let timerInterval
@@ -56,6 +66,8 @@ export default function Login(props) {
                 if (result.dismiss === Swal.DismissReason.timer) {
                     setredirect(true)
                     props.setname(content.name)
+                    props.settotal(totalUser.total)
+                    props.setalluser(allUser)
                 }
             })
         } else {

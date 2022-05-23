@@ -9,6 +9,8 @@ import Register from "../pages/register/Register";
 export default function Index() {
      // * siapkan variable penampung data user 
      const [name, setname] = useState('');
+     const [alluser, setalluser] = useState([]);
+     const [total, settotal] = useState(0)
 
      // menggunakan useEffect untuk mengambil data user dari backend
      useEffect(() => {
@@ -31,8 +33,8 @@ export default function Index() {
             <BrowserRouter>
             <Navbar name={name} setname={setname}/>
                 <Routes>
-                    <Route path = "/" exact element={<Home name={name}/>}/>
-                    <Route path = "/login" exact element={<Login setname={setname}/>}/>
+                    <Route path = "/" exact element={<Home name={name} user={alluser} total={total}/>}/>
+                    <Route path = "/login" exact element={<Login setname={setname} settotal={settotal} setalluser={setalluser}/>}/>
                     <Route path = "/register" exact element={<Register/>}/>
                 </Routes>
             </BrowserRouter>
