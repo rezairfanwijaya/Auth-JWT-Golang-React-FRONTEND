@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navbar(props) {
     // * siapkan variable untuk menampung menu pada navbar
     let menu
-    
-    
+     
     // * logout handler
     const logout = async () => {
         // * hit endpoint yang sudah kita bikin (http://localhost:8080/api/logout)
@@ -14,10 +13,7 @@ export default function Navbar(props) {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', // * untuk mengambil cookies dari server
         })
-
-        console.log(resp)
-        props.setname('')
-        
+        props.setname('')        
     }
 
 
@@ -37,7 +33,7 @@ export default function Navbar(props) {
         menu = (
             <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                 <li className="nav-item">
-                    <Link to="/register" className="nav-link active" aria-current="page" >{props.name}</Link>
+                    <div className="nav-link active me-3" aria-current="page" >Hi, {props.name}</div>
                 </li>
                 <li className="nav-item">
                     <Link to="/login"  className="nav-link active bg-danger rounded" onClick={logout}>Logout</Link>
