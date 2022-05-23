@@ -39,10 +39,26 @@ export default function Login(props) {
 
         // ! ketika ada error dari backend
         if (code === 200) {
-            // * jika berhasil, redirect ke halaman home
-            setredirect(true)
-            props.setname(content.name)
-        }else {
+            let timerInterval
+            MySwal.fire({
+                title: 'Login Berhasil',
+                icon: 'success',
+                timer: 2300,
+                timerProgressBar: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then((result) => {
+                // * ketika berhasil register ubah nilai redirect menjadi true agar langsung diarahkan ke halaman login
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    setredirect(true)
+                    props.setname(content.name)
+                }
+            })
+        } else {
             MySwal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -51,7 +67,7 @@ export default function Login(props) {
         }
     }
 
-    if (redirect){
+    if (redirect) {
         return <Navigate to="/" />
     }
 

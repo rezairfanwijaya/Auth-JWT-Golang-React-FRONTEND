@@ -51,10 +51,6 @@ export default function Register() {
                 timerProgressBar: false,
                 didOpen: () => {
                   Swal.showLoading()
-                  const b = Swal.getHtmlContainer().querySelector('b')
-                  timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                  }, 100)
                 },
                 willClose: () => {
                   clearInterval(timerInterval)
